@@ -7,12 +7,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
 
     // Definimos variables
-
     EditText txtTituloNote, txtCuerpoNote;
     Button btnGuardar;
+
+    //Crear la lista
+    ArrayList<Notas> listNotas = new ArrayList<>();
 
 
 
@@ -31,14 +35,26 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Guardando Nota", Toast.LENGTH_SHORT).show();
+                agregarNota(txtTituloNote.getText().toString(),txtCuerpoNote.getText().toString());
+
             }
         });
 
 
     }
 
-
     // Iniciando código ----
+    private void agregarNota(String titulo, String cuerpo){
+        if(!titulo.isEmpty() && cuerpo.isEmpty()){
+
+            Notas nuevaNota = new Notas(titulo,cuerpo);
+            listNotas.add(nuevaNota);
+        } else {
+            Toast.makeText(this, "Favor rellene los campos", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
 
 
 

@@ -8,6 +8,11 @@ public class Notas {
     public Notas() {
     }
 
+    public Notas(String titulo, String cuerpo) {
+        this.titulo = titulo;
+        this.cuerpo = cuerpo;
+    }
+
     //Getters and Setters
     public String getTitulo() {
         return titulo;
