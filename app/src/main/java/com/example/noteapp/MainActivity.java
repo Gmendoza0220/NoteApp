@@ -52,9 +52,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Favor rellene los campos", Toast.LENGTH_SHORT).show();
         }
-
-
     }
+
 
 
 
