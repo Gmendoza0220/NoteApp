@@ -1,6 +1,7 @@
 package com.example.noteapp;
 
 // Se importan los elementos
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.LayoutInflater;
+
 import java.util.ArrayList;
 
 
@@ -57,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Se llama al método para agregar la nota
-                agregarNota(txtTituloNote.getText().toString(),txtCuerpoNote.getText().toString());
+                agregarNota(txtTituloNote.getText().toString(), txtCuerpoNote.getText().toString());
             }
         });
 
@@ -72,17 +74,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Guardar Notas 1)
-    private void agregarNota(String titulo, String cuerpo){
+    private void agregarNota(String titulo, String cuerpo) {
         //  Se verifica que los campos no esten vacíos
-        if(!titulo.isEmpty() && !cuerpo.isEmpty()){
+        if (!titulo.isEmpty() && !cuerpo.isEmpty()) {
             Toast.makeText(MainActivity.this, "Nota guardada", Toast.LENGTH_SHORT).show();
-            Notas nuevaNota = new Notas(titulo,cuerpo); // Se crea la nueva nota
+            Notas nuevaNota = new Notas(titulo, cuerpo); // Se crea la nueva nota
             listNotas.add(nuevaNota); // Se añade la nueva nota a la lista
 
             adapter.notifyDataSetChanged(); // Notifica al adaptador para actualizar el RecyclerView
 
+            //Se limpia los campos de textos correspondientes al crear notas
+            limpiarCampos("Agregar");
+
+
         } else {
-            Toast.makeText(this, "`PorFavor rellene los campos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "`Por favor rellene los campos", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -137,14 +143,14 @@ public class MainActivity extends AppCompatActivity {
 
     // Eliminar notas
 
-    public void eliminarNota(String titulo){
+    public void eliminarNota(String titulo) {
 
         // Verifica que los campos no estén vacíos.
-        if(!titulo.isEmpty()){
+        if (!titulo.isEmpty()) {
             boolean eliminado = false; // Permitirá saber si se eliminó correctamente la nota
-            for(int i = 0; i < listNotas.size(); i++){
+            for (int i = 0; i < listNotas.size(); i++) {
                 Notas n = listNotas.get(i); // Obtenemos la instancia nota en la posicion i.
-                if(n.getTitulo().equals(titulo)){
+                if (n.getTitulo().equals(titulo)) {
                     listNotas.remove(n); // Removemos la nota extraía en el bucle for mediante el indice.
 
                     adapter.notifyDataSetChanged(); // Notifica al adaptador para actualizar el RecyclerView
@@ -153,23 +159,30 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             // En caso de que SI se haya eliminado, se mostrará un mensaje
-            if(eliminado){
+            if (eliminado) {
                 Toast.makeText(this, "Nota eliminada con éxito", Toast.LENGTH_SHORT).show();
             } else {
                 // En caso de que NO se haya eliminado, se motrará un mensaje de igual manera.
                 Toast.makeText(this, "No se encontró la nota ingresada", Toast.LENGTH_SHORT).show();
-            }
 
+            }
+            //Se limpia los campos de textos correspondientes al eliminar notas
+            limpiarCampos("Eliminar");
         } else {
             Toast.makeText(this, "Complete el campo", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    public void limpiarCampos(String accion) {
+        if (accion.equals("Agregar")) {
+            txtTituloNote.setText("");
+            txtCuerpoNote.setText("");
 
-
-
-
+        } else if (accion.equals("Eliminar")) {
+            txtNotaEliminar.setText("");
+        }
+    }
 
 
 }
