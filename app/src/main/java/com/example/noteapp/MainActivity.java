@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     // Definimos variables
-    EditText txtTituloNote, txtCuerpoNote;
-    Button btnGuardar;
+    EditText txtTituloNote, txtCuerpoNote, txtNotaEliminar;
+    Button btnGuardar, btnEliminar;
 
     RecyclerView rvNotes;
 
@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         // Vinculamos los elementos de la interfaz con las variables creadas
 
         btnGuardar = findViewById(R.id.btnGuardar);
+        btnEliminar = findViewById(R.id.btnEliminarNota);
         txtTituloNote = findViewById(R.id.txtTituloNota);
         txtCuerpoNote = findViewById(R.id.txtCuerpoNota);
+        txtNotaEliminar = findViewById(R.id.txtNotaEliminar);
         rvNotes = findViewById(R.id.rvNotas);
 
         // Configurar el LayoutManager para el recyclerView
@@ -56,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Se llama al método para agregar la nota
                 agregarNota(txtTituloNote.getText().toString(),txtCuerpoNote.getText().toString());
+            }
+        });
+
+        btnEliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                eliminarNota(txtNotaEliminar.getText().toString());
             }
         });
 
@@ -125,4 +134,42 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    // Eliminar notas
+
+    public void eliminarNota(String titulo){
+
+        // Verifica que los campos no estén vacíos.
+        if(!titulo.isEmpty()){
+            boolean eliminado = false; // Permitirá saber si se eliminó correctamente la nota
+            for(int i = 0; i < listNotas.size(); i++){
+                Notas n = listNotas.get(i); // Obtenemos la instancia nota en la posicion i.
+                if(n.getTitulo().equals(titulo)){
+                    listNotas.remove(n); // Removemos la nota extraía en el bucle for mediante el indice.
+
+                    adapter.notifyDataSetChanged(); // Notifica al adaptador para actualizar el RecyclerView
+                    eliminado = true; // Indica que si se eliminó la nota ingresada
+                    break; // Rompemos el bucle por tema de rendimiento
+                }
+            }
+            // En caso de que SI se haya eliminado, se mostrará un mensaje
+            if(eliminado){
+                Toast.makeText(this, "Nota eliminada con éxito", Toast.LENGTH_SHORT).show();
+            } else {
+                // En caso de que NO se haya eliminado, se motrará un mensaje de igual manera.
+                Toast.makeText(this, "No se encontró la nota ingresada", Toast.LENGTH_SHORT).show();
+            }
+
+        } else {
+            Toast.makeText(this, "Complete el campo", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+
+
+
+
+
+
 }

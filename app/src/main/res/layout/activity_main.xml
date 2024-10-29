@@ -23,7 +23,7 @@
             <TableLayout
                 android:id="@+id/tableLayout"
                 android:layout_width="match_parent"
-                android:layout_height="191dp">
+                android:layout_height="157dp">
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -33,7 +33,9 @@
                         android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Creador de Notas" />
+                        android:text="Creador de Notas"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </TableRow>
 
                 <TableRow
@@ -89,9 +91,70 @@
                 android:text="Agregar" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/textView7"
                 android:layout_width="match_parent"
-                android:layout_height="107dp" />
+                android:layout_height="wrap_content" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="101dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Eliminar Nota"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="135dp">
+
+                    <EditText
+                        android:id="@+id/txtNotaEliminar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="74dp"
+                        android:ems="10"
+                        android:hint="Titulo de nota a eliminar..."
+                        android:inputType="textPersonName" />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="22dp"
+                        android:text="Titulo" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnEliminarNota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Eliminar" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="34dp" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvNotas"
